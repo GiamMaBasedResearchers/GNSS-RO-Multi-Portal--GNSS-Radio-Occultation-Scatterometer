@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GNSS-RO Multi-Portal- GNSS Radio Occultation & Scatterometer Time-averaged geographical mean for Bending angles from GNSS-RO | GiamMa SDR R&D IoT</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Manrope',sans-serif;background:#121212;color:#fff;overflow:hidden;width:100vw;height:100vh}
+.w{width:142.857%;height:142.857%;transform:scale(.7);transform-origin:top left}
+.g{display:grid;grid-template-columns:3fr 2fr;grid-template-rows:1fr 1fr minmax(180px,1.1fr);gap:4px;height:calc(100% - 48px);padding:4px}
+.p{position:relative;border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;background:#0a0a0a;transition:border-color .3s}
+.p iframe{width:100%;height:100%;border:none;display:block}
+.lb{position:absolute;top:0;left:0;right:0;z-index:10;padding:8px 12px 20px;background:linear-gradient(to bottom,rgba(0,0,0,.88) 60%,transparent);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;pointer-events:none}
+.lb .d{width:6px;height:6px;border-radius:50%;background:#a3cc56;box-shadow:0 0 6px #a3cc56;animation:pu 2s infinite}
+.lb .t{margin-left:auto;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(163,204,86,.15);color:#a3cc56;font-weight:500}
+.bt{position:absolute;top:5px;right:8px;z-index:20;display:flex;gap:4px}
+.bt button{width:28px;height:28px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.65);backdrop-filter:blur(10px);color:rgba(255,255,255,.55);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.bt button:hover{background:rgba(163,204,86,.2);color:#a3cc56;border-color:rgba(163,204,86,.4)}
+.bt button:active{transform:scale(.9)}
+.sw{position:absolute;top:30px;left:12px;z-index:15;display:flex;gap:4px}
+.sw button{padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.65);backdrop-filter:blur(10px);color:rgba(255,255,255,.45);font-size:10px;font-weight:600;font-family:'Manrope',sans-serif;letter-spacing:.04em;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
+.sw button.on{background:rgba(163,204,86,.18);color:#a3cc56;border-color:rgba(163,204,86,.4);box-shadow:0 0 12px rgba(163,204,86,.1)}
+.sw button:hover:not(.on){color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25)}
+.pw{width:100%;height:100%;overflow:hidden}
+.pw.zm{display:flex;align-items:center;justify-content:center}
+.pw.zm iframe{transform:scale(.80);transform-origin:center center;width:200%;height:200%;flex-shrink:0}
+.p:fullscreen .pw.zm iframe{transform:none;width:100%;height:100%}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.35}}
+.h{height:48px;display:flex;align-items:center;padding:0 16px;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);background:#0d0d0d}
+.h h1{font-size:14px;font-weight:700;letter-spacing:.04em}.h h1 span{color:#a3cc56}
+.h .s{width:1px;height:20px;background:rgba(255,255,255,.12)}
+.h p{font-size:11px;color:rgba(255,255,255,.4)}
+.h .l{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:10px;color:#a3cc56;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.h .l i{width:8px;height:8px;border-radius:50%;background:#a3cc56;animation:pu 1.5s infinite;display:block}
+.c1{grid-column:1;grid-row:1/3}.c2{grid-column:2;grid-row:1}.c3{grid-column:2;grid-row:2}.c4{grid-column:1;grid-row:3}.c5{grid-column:2;grid-row:3}
+.p:hover{border-color:rgba(163,204,86,.25)}
+.p:fullscreen{border-radius:0;border:none;background:#000}
+.p:fullscreen iframe{width:100vw;height:100vh}
+.spinning svg{animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.iw{width:100%;height:100%;overflow:hidden}
+.iw iframe{transform:scale(.62);transform-origin:top left;width:161.29%;height:161.29%}
+.p:fullscreen .iw iframe{transform:none;width:100%;height:100%}
+.cat{padding:10px 14px 6px;height:100%;overflow-y:auto;display:flex;flex-direction:column}
+.cat::-webkit-scrollbar{width:5px}
+.cat::-webkit-scrollbar-track{background:transparent}
+.cat::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:4px}
+.cat::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.25)}
+.cg{margin-bottom:6px}
+.cg-h{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a3cc56;padding:4px 0 3px;border-bottom:1px solid rgba(163,204,86,.15);margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.cg-h .nn{font-weight:400;color:rgba(255,255,255,.35);font-size:9px}
+.sr{display:grid;grid-template-columns:1fr 1fr 72px 58px;gap:0 8px;padding:3px 8px;font-size:11px;align-items:center;border-bottom:1px solid rgba(255,255,255,.03)}
+.sr:hover{background:rgba(255,255,255,.03);border-radius:4px}
+.sr .sn{font-weight:600;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr .sc{color:rgba(255,255,255,.4);font-size:10px;white-space:nowrap}
+.sr .ni{font-family:'Courier New',monospace;color:rgba(255,255,255,.8);font-size:10px;font-weight:500}
+.sr .nu{font-family:'Courier New',monospace;color:rgba(255,255,255,.25);font-size:10px;font-style:italic}
+.sa{display:flex;align-items:center;gap:3px}
+.sa button{width:18px;height:18px;border:none;background:transparent;color:rgba(255,255,255,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:all .15s}
+.sa button:hover{color:#a3cc56;background:rgba(163,204,86,.12)}
+.sd{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.sd.on{background:#a3cc56;box-shadow:0 0 5px #a3cc56}
+.sd.dg{background:#eab308;box-shadow:0 0 5px #eab308}
+.sd.uk{background:#6b7280;box-shadow:0 0 3px rgba(107,114,128,.3)}
+.sth{display:grid;grid-template-columns:1fr 1fr 72px 58px;gap:0 8px;padding:2px 8px 6px;font-size:9px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.1em;font-weight:600;position:sticky;top:0;background:#0a0a0a;z-index:2}
+.ft{margin-top:auto;padding-top:6px;border-top:1px solid rgba(255,255,255,.06);font-size:9px;color:rgba(255,255,255,.25);text-align:center;line-height:1.6}
+</style>
+</head><body>
+<div class="w">
+<div class="h">
+<h1><span>GNSS-RO</span> Multi-Portal- GNSS Radio Occultation & Scatterometer Time-averaged geographical mean for Bending angles from GNSS-RO</h1>
+<div class="s"></div>
+<p>GiamMa-based researchers · SDR R&D IoT · <a href="https://x.com/giammaiot2" target="_blank" style="color:rgba(255,255,255,.4);text-decoration:none">@GiammaIoT2</a></p>
+<div class="l"><i></i>LIVE FEEDS</div>
+</div>
+<div class="g">
+
+<div class="p c1" id="p0">
+<div class="lb"><div class="d"></div><span id="p0n">AstriaGraph · TACC</span><span class="t" id="p0t">GRAPH</span></div>
+<div class="sw">
+<button id="t0" class="on" onclick="swSrc('t0','AstriaGraph · TACC','GRAPH','http://astria.tacc.utexas.edu/AstriaGraph/',false)"><i data-lucide="network" style="width:12px;height:12px"></i>AstriaGraph</button>
+<button id="t1" onclick="swSrc('t1','KeepTrack · Space','TRACKER','https://app.keeptrack.space/',false)"><i data-lucide="radar" style="width:12px;height:12px"></i>KeepTrack</button>
+<button id="t2" onclick="swSrc('t2','ROM-SAF · EUMETSAT','MAP','https://rom-saf.eumetsat.int/monitoring/maps.php',true)"><i data-lucide="globe" style="width:12px;height:12px"></i>ROM-SAF</button>
+</div>
+<div class="bt">
+<button onclick="rf(this,'f0')" title="Refresh"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i></button>
+<button class="fb" onclick="fs('p0')" title="Expand"><i data-lucide="maximize-2" style="width:13px;height:13px"></i></button>
+</div>
+<div class="pw" id="p0w">
+<iframe id="f0" src="http://astria.tacc.utexas.edu/AstriaGraph/" loading="lazy"></iframe>
+</div>
+</div>
+
+<div class="p c2" id="p1">
+<div class="lb"><div class="d"></div>ECMWF · GNSS-RO Count<span class="t">DATA</span></div>
+<div class="bt">
+<button onclick="rf(this,'f1')" title="Refresh"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i></button>
+<button class="fb" onclick="fs('p1')" title="Expand"><i data-lucide="maximize-2" style="width:13px;height:13px"></i></button>
+</div>
+<div class="iw"><iframe id="f1" src="https://charts.ecmwf.int/catalogue/packages/obstat/products/geo_gpsro_v0/overview/label?base_time=202607080000&data_type=count&flag=All&label=map_gnssro_0001_LWDA_limb_gpsro_003_short&level=60&phase=0&stream=GPS" loading="lazy"></iframe></div>
+</div>
+
+<div class="p c3" id="p2">
+<div class="lb"><div class="d"></div>ECMWF · System Comparison<span class="t">DATA</span></div>
+<div class="bt">
+<button onclick="rf(this,'f2')" title="Refresh"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i></button>
+<button class="fb" onclick="fs('p2')" title="Expand"><i data-lucide="maximize-2" style="width:13px;height:13px"></i></button>
+</div>
+<div class="iw"><iframe id="f2" src="https://charts.ecmwf.int/catalogue/packages/obstat/products/geo_gpsro_v0/overview/stream?base_time=202607080000&data_type=norm_andep_stdv&flag=All&label=map_gnssro_0001_LWDA_limb_gpsro_267_short&level=60&phase=0&stream=All_datastreams" loading="lazy"></iframe></div>
+</div>
+
+<div class="p c4" id="p3">
+<div class="lb"><div class="d"></div>GNSS-RO Satellite Catalog · NORAD IDs<span class="t" id="sc">0 SATS</span></div>
+<div class="bt">
+<button onclick="rf(this,'f3')" title="Refresh"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i></button>
+<button class="fb" onclick="fs('p3')" title="Expand"><i data-lucide="maximize-2" style="width:13px;height:13px"></i></button>
+</div>
+<div class="cat" id="catalog"></div>
+</div>
+
+<div class="p c5" id="p4">
+<div class="lb"><div class="d"></div>GNSS-RO Anomaly Globe<span class="t">3D</span></div>
+<div class="bt">
+<button onclick="rf(this,'f4')" title="Refresh"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i></button>
+<button class="fb" onclick="fs('p4')" title="Expand"><i data-lucide="maximize-2" style="width:13px;height:13px"></i></button>
+</div>
+<div class="iw"><iframe id="f4" src="" loading="lazy"></iframe></div>
+</div>
+
+</div>
+</div>
+<script>
+var _globeSrc='<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>GNSS-RO Anomaly Globe</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"><\/script><style>:root{--bg:#0a0a0a;--pnl:#111;--bdr:rgba(255,255,255,.08);--acc:#a3cc56;--mt:rgba(255,255,255,.4)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Manrope,sans-serif;background:var(--bg);color:#fff;overflow:hidden;height:100vh;display:flex}#sb{width:248px;min-width:248px;height:100vh;background:var(--pnl);border-right:1px solid var(--bdr);overflow-y:auto;display:flex;flex-direction:column;z-index:10}#sb::-webkit-scrollbar{width:4px}#sb::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px}.sh{padding:10px 12px;border-bottom:1px solid var(--bdr);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:6px}.sh span{color:var(--acc)}.s2{padding:8px 12px;border-bottom:1px solid var(--bdr)}.s2 h4{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}.s2 select{width:100%;padding:4px 6px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:5px;color:#fff;font-size:10px;font-family:inherit;margin-bottom:4px;outline:none}.s2 select option{background:#1a1a1a}.s2 input[type=range]{width:100%;margin-bottom:4px;accent-color:var(--acc)}.ck{display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,.6);margin-bottom:3px;cursor:pointer}.ck input{accent-color:var(--acc)}.vd{font-size:9px;color:var(--acc);font-weight:600;min-width:24px;text-align:right}.rr{display:flex;align-items:center;gap:3px;margin-bottom:3px}.rr label{font-size:8px;color:var(--mt);width:28px;flex-shrink:0}.rr input{flex:1}.rr span{font-size:8px;color:var(--acc);width:22px;text-align:right}#lg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}.ly{position:relative;border-radius:3px;overflow:hidden;border:1px solid var(--bdr);cursor:pointer;transition:all .15s;aspect-ratio:2/1}.ly.on{border-color:rgba(163,204,86,.5)}.ly.off{opacity:.25}.ly img{width:100%;height:100%;object-fit:cover;display:block}.ly .lt{position:absolute;bottom:0;left:0;right:0;padding:0 2px;background:rgba(0,0,0,.75);font-size:7px;font-weight:600;color:rgba(255,255,255,.7);text-align:center}#vp{flex:1;position:relative;overflow:hidden;background:#050508}#ov{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);z-index:10;transition:opacity .4s,visibility .4s}#ov.hide{opacity:0;visibility:hidden;pointer-events:none}.oh{padding:12px 16px;border-bottom:1px solid var(--bdr);flex-shrink:0}.oh h2{font-size:14px;font-weight:700;margin-bottom:4px}.oh p{font-size:10px;color:var(--mt);line-height:1.5}.ob2{flex:1;display:flex;min-height:0;overflow:hidden}.oi{width:42%;display:flex;flex-direction:column;border-right:1px solid var(--bdr);padding:12px}.oi label{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:4px;display:block}#up{flex:1;min-height:80px;background:#080808;border:1px solid var(--bdr);border-radius:6px;padding:8px;color:var(--acc);font-family:monospace;font-size:7.5px;line-height:1.4;resize:none;outline:none;word-break:break-all}#ui{font-size:9px;color:var(--mt);margin-top:6px;min-height:14px}#ui b{color:var(--acc)}#ui .er{color:#ef4444}.op{width:58%;display:flex;flex-direction:column;padding:12px;overflow-y:auto}.op h4{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:6px}#pi{max-width:100%;border-radius:4px;border:1px solid var(--bdr);display:none}#pinfo{font-size:9px;color:var(--mt);margin-top:6px}.os{padding:8px 12px;border-top:1px solid var(--bdr);flex-shrink:0;max-height:160px;overflow-y:auto}.os h4{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:6px}#sg{display:grid;grid-template-columns:repeat(10,1fr);gap:3px}.scc{position:relative;border-radius:3px;overflow:hidden;border:1px solid var(--bdr);aspect-ratio:2/1;cursor:pointer;transition:all .15s;background:rgba(255,255,255,.02)}.scc.sel{border-color:rgba(163,204,86,.3)}.scc.unsel{opacity:.15}.scc img{width:100%;height:100%;object-fit:cover;display:none}.scc .sl{position:absolute;bottom:0;left:0;right:0;padding:0 1px;background:rgba(0,0,0,.7);font-size:5px;font-weight:600;color:rgba(255,255,255,.5);text-align:center}.scc .sk{position:absolute;top:1px;left:1px;width:9px;height:9px;accent-color:var(--acc);cursor:pointer;z-index:2}.obt{display:flex;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--bdr);flex-shrink:0}.obb{padding:8px 16px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;border:1px solid rgba(163,204,86,.3);background:rgba(163,204,86,.12);color:#a3cc56;opacity:.35;pointer-events:none}.obb.ready{opacity:1;pointer-events:auto}.obb.ready:hover{background:rgba(163,204,86,.25)}.obb.sec{border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.1);color:#60a5fa}#bb{padding:5px 12px;background:transparent;border:1px solid var(--bdr);border-radius:4px;color:var(--mt);font-size:9px;font-weight:600;cursor:pointer;font-family:inherit;display:none}#bb:hover{color:#fff}#mb{position:absolute;bottom:0;left:0;right:0;padding:6px 14px;background:linear-gradient(to top,rgba(0,0,0,.85),transparent);display:flex;gap:16px;font-size:9px;color:var(--mt);z-index:4;pointer-events:none}#mb .mv{color:rgba(255,255,255,.8);font-weight:600}#hm{position:absolute;top:0;left:0;pointer-events:none;z-index:2}.sa{font-size:7px;font-weight:600;color:var(--acc);background:rgba(163,204,86,.12);border:1px solid rgba(163,204,86,.3);border-radius:3px;padding:1px 6px;cursor:pointer;font-family:inherit;letter-spacing:.03em}</style><\/head><body><aside id="sb"><div class="sh"><span>GNSS-RO</span> Anomaly Globe</div><div class="s2"><h4>Visualization</h4><label>Spacing <span class="vd" id="vS">0.015</span></label><input type="range" id="iS" min="0.003" max="0.10" step="0.001" value="0.015"><label>Opacity <span class="vd" id="vO">0.55</span></label><input type="range" id="iO" min="0.05" max="1" step="0.05" value="0.55"><label class="ck"><input type="checkbox" id="iAR" checked>Auto Rotate</label><label class="ck"><input type="checkbox" id="iG" checked>Earth Grid</label></div><div class="s2"><h4>Crop Map</h4><label class="ck"><input type="checkbox" id="iC" checked>Enable Crop</label><div class="rr"><label>Top</label><input type="range" id="cT" min="0" max="50" step="1" value="36"><span id="vT">36%</span></div><div class="rr"><label>Bot</label><input type="range" id="cB" min="0" max="50" step="1" value="12"><span id="vB">12%</span></div><div class="rr"><label>L</label><input type="range" id="cL" min="0" max="30" step="1" value="5"><span id="vL">5%</span></div><div class="rr"><label>R</label><input type="range" id="cR" min="0" max="30" step="1" value="6"><span id="vR">6%</span></div></div><div class="s2"><h4>Density</h4><label class="ck"><input type="checkbox" id="iD">Composite Mode</label><label>Blend <span class="vd" id="vB2">0.5</span></label><input type="range" id="iB" min="0.05" max="1" step="0.05" value="0.5"><label class="ck"><input type="checkbox" id="iH">Heatmap Overlay</label></div><div class="s2" style="flex:1;min-height:0"><h4>Layers <button class="sa" id="saBtn">SELECT ALL</button></h4><div id="lg"></div></div></aside><main id="vp"><div id="ov"><div class="oh"><h2>Image URLs</h2><p>To extract the list of image links from pages such as ECMWF (<a href="https://charts.ecmwf.int/catalogue/packages/obstat/products/geo_gpsro_v0/overview/level?base_time=202607100000&data_type=norm_andep_stdv&flag=All&label=map_gnssro_0001_LWDA_limb_gpsro_269_short&level=2&phase=0&stream=GPS" target="_blank">ECMWF Charts</a>), if you don\'t want to do it manually, use the service jsonlink (<a href="https://jsonlink.io/extract-images-from-url" target="_blank">jsonlink.io</a>) which generates a CSV file that you can read with a text editor.</p></div><div class="ob2"><div class="oi"><label>Image URLs</label><textarea id="up" placeholder="https://charts.ecmwf.int/..."></textarea><div id="ui"></div></div><div class="op"><h4>Preview</h4><img id="pi"><div id="pinfo"></div><h4 style="margin-top:12px">Select Layers</h4><div id="sg"></div></div></div><div class="obt"><div id="u2" style="font-size:9px;color:var(--mt);flex:1"><b>0</b>/29 URLs</div><button id="bb" onclick="document.getElementById(\'ov\').classList.remove(\'hide\')">Back</button><button id="tb" class="obb sec">Test URL</button><button id="pb" class="obb">Process</button></div></div><canvas id="hm"></canvas><div id="mb"><span>Level: <span class="mv" id="mLv">-</span></span><span>Alt: <span class="mv" id="mAl">-</span></span><span>Coord: <span class="mv" id="mCo">-</span></span><span>Status: <span class="mv" id="mSt">Waiting</span></span></div></main><script>window._ok=false;window.addEventListener(\'error\',function(e){if(!window._ok)document.getElementById(\'ov\').innerHTML=\'<div style="padding:40px;text-align:center"><b style="color:#ef4444;font-size:16px">Module Error</b><br><span style="color:var(--mt);font-size:11px;margin-top:8px;display:block">\'+(e.message||\'\')+\'</span></div>\'},true);setTimeout(function(){if(!window._ok)document.getElementById(\'ov\').innerHTML=\'<div style="padding:40px;text-align:center"><b style="color:#ef4444;font-size:16px">Timeout</b></div>\'},15000)<\/script><script type="importmap">{\"imports\":{\"three\":\"https://unpkg.com/three@0.160.0/build/three.module.js\",\"three/addons/\":\"https://unpkg.com/three@0.160.0/examples/jsm/\"}}<\/script><script type="module">window._ok=true;import*as THREE from\'three\';import{OrbitControls}from\'three/addons/controls/OrbitControls.js\';var ER=5,$=function(id){return document.getElementById(id)};var LV=new Array(29).fill(null);var sel=new Array(29).fill(true),allSel=true;function gA(l){return+(0.5+(l-1)*1.2).toFixed(1)}function gCR(w,h){if(!$(\'iC\').checked)return{sx:0,sy:0,sw:w,sh:h};var cl=+$(\'cL\').value/100,cr=+$(\'cR\').value/100,ct=+$(\'cT\').value/100,cb=+$(\'cB\').value/100;return{sx:Math.round(w*cl),sy:Math.round(h*ct),sw:Math.max(1,Math.round(w*(1-cl-cr))),sh:Math.max(1,Math.round(h*(1-ct-cb)))}}function loadImg(url){return new Promise(function(res,rej){var img=new Image();var t=setTimeout(function(){img.onload=img.onerror=null;rej(new Error(\'timeout\'))},10000);img.onload=function(){clearTimeout(t);res(img)};img.onerror=function(){clearTimeout(t);rej(new Error(\'fail\'))};img.src=url})}function parseU(t){return t.split(/[\\n\\r]+/).map(function(u){return u.trim()}).filter(function(u){return u.startsWith(\'http\')&&u.includes(\'.png\')})}var up=$(\'up\'),ui=$(\'ui\'),u2=$(\'u2\'),pi=$(\'pi\'),pinfo=$(\'pinfo\'),pb=$(\'pb\'),tb=$(\'tb\');up.addEventListener(\'input\',function(){var n=parseU(up.value).length;ui.innerHTML=n>0?\'<b>\'+n+\'</b> PNG URLs\':\'No valid URLs\';u2.innerHTML=\'<b>\'+n+\'</b>/29 URLs\';tb.classList.toggle(\'ready\',n>0);updPb()});function updPb(){var n=parseU(up.value).length,c=sel.filter(Boolean).length;pb.textContent=\'PROCESS \'+c+\' LAYERS\';pb.classList.toggle(\'ready\',n>0&&c>0)}tb.addEventListener(\'click\',function(){var urls=parseU(up.value);if(!urls.length)return;ui.innerHTML=\'Testing...\';pinfo.textContent=\'\';loadImg(urls[0]).then(function(img){pi.src=img.src;pi.style.display=\'block\';pinfo.innerHTML=\'<b>\'+(img.naturalWidth||\'?\')+\'x\'+(img.naturalHeight||\'?\')+\'</b> loaded\';ui.innerHTML=\'<b>OK</b>\'}).catch(function(e){ui.innerHTML=\'<span class="er">FAILED: \'+e.message+\'</span>\'})});$(\'saBtn\').addEventListener(\'click\',function(){allSel=!allSel;for(var i=0;i<29;i++)sel[i]=allSel;this.textContent=allSel?\'DESELECT ALL\':\'SELECT ALL\';document.querySelectorAll(\'.scc\').forEach(function(d){d.className=\'scc \'+(allSel?\'sel\':\'unsel\');d.querySelector(\'.sk\').checked=allSel});for(var i=0;i<29;i++){var el=document.getElementById(\'ly\'+i);var l=LV[i];if(el&&l){l.vis=allSel;el.className=allSel?\'ly on\':\'ly off\'}}dirty=true;updPb()});function buildSel(){var g=$(\'sg\');g.innerHTML=\'\';for(var i=0;i<29;i++){var d=document.createElement(\'div\');d.className=\'scc\'+(sel[i]?\' sel\':\' unsel\');d.innerHTML=\'<input type="checkbox" class="sk" \'+(sel[i]?\'checked\':\'\')+\'><img id="si\'+i+\'"><div class="sl">L\'+(i+1)+\'</div>\';(function(idx,dd){dd.addEventListener(\'click\',function(e){if(e.target.classList.contains(\'sk\'))return;sel[idx]=!sel[idx];dd.className=\'scc \'+(sel[idx]?\'sel\':\'unsel\');dd.querySelector(\'.sk\').checked=sel[idx];updPb()});dd.querySelector(\'.sk\').addEventListener(\'change\',function(){sel[idx]=this.checked;dd.className=\'scc \'+(this.checked?\'sel\':\'unsel\');updPb()})})(i,d);g.appendChild(d)}}var vp=$(\'vp\'),scene=new THREE.Scene();scene.background=new THREE.Color(0x050508);var cam=new THREE.PerspectiveCamera(45,vp.clientWidth/vp.clientHeight,.1,100);cam.position.set(0,3,14);var ren=new THREE.WebGLRenderer({antialias:true});ren.setSize(vp.clientWidth,vp.clientHeight);ren.setPixelRatio(Math.min(devicePixelRatio,2));vp.insertBefore(ren.domElement,vp.firstChild);var ctrl=new OrbitControls(cam,ren.domElement);ctrl.enableDamping=true;ctrl.dampingFactor=.06;ctrl.minDistance=3;ctrl.maxDistance=40;ctrl.autoRotate=true;ctrl.autoRotateSpeed=.4;ctrl.minPolarAngle=Math.PI/2;ctrl.maxPolarAngle=Math.PI/2;scene.add(new THREE.AmbientLight(0xffffff,.4));var dl=new THREE.DirectionalLight(0xffffff,.5);dl.position.set(5,8,5);scene.add(dl);(function(){var c=document.createElement(\'canvas\');c.width=1024;c.height=512;var x=c.getContext(\'2d\');x.fillStyle=\'#0a1628\';x.fillRect(0,0,1024,512);x.strokeStyle=\'rgba(80,140,255,0.07)\';x.lineWidth=1;for(var i=-80;i<=80;i+=10){var y=(90-i)/180*512;x.beginPath();x.moveTo(0,y);x.lineTo(1024,y);x.stroke()}for(var i=-180;i<180;i+=10){var xp=(i+180)/360*1024;x.beginPath();x.moveTo(xp,0);x.lineTo(xp,512);x.stroke()}x.strokeStyle=\'rgba(80,140,255,0.15)\';x.lineWidth=1.5;[0,-23.5,23.5,-66.5,66.5].forEach(function(i){var y=(90-i)/180*512;x.beginPath();x.moveTo(0,y);x.lineTo(1024,y);x.stroke()});scene.add(new THREE.Mesh(new THREE.SphereGeometry(ER,64,32),new THREE.MeshPhongMaterial({map:new THREE.CanvasTexture(c),transparent:true,opacity:.85})))})();var gridM=new THREE.Mesh(new THREE.SphereGeometry(ER*1.001,36,18),new THREE.MeshBasicMaterial({color:0x3366aa,wireframe:true,transparent:true,opacity:.06}));scene.add(gridM);var sp2=new Float32Array(3000);for(var i=0;i<3000;i++)sp2[i]=(Math.random()-.5)*80;var spG=new THREE.BufferGeometry();spG.setAttribute(\'position\',new THREE.BufferAttribute(sp2,3));scene.add(new THREE.Points(spG,new THREE.PointsMaterial({color:0xffffff,size:.08,transparent:true,opacity:.5})));var hm=$(\'hm\'),hx=hm.getContext(\'2d\');var dirty=true,lastAz=null,lastDist=null,lastEl=null;function resHM(){var d=Math.min(devicePixelRatio,2);hm.width=vp.clientWidth*d;hm.height=vp.clientHeight*d;hm.style.width=vp.clientWidth+\'px\';hm.style.height=vp.clientHeight+\'px\';hx.setTransform(d,0,0,d,0,0);dirty=true;lastAz=null;lastDist=null;lastEl=null}resHM();function sProj(){var p=cam.position,r=p.length(),az=Math.atan2(p.x,p.z);var v=new THREE.Vector3(0,0,0).project(cam);var cx=(v.x*.5+.5)*vp.clientWidth,cy=(-v.y*.5+.5)*vp.clientHeight;var R=ER/(r*Math.tan(cam.fov*Math.PI/360))*(vp.clientHeight/2);return{cx:cx,cy:cy,R:Math.max(1,R),az:az}}function projLayer(ctx,src,sx,sy,sw,sh,cx,cy,R,az,op){if(R<4||sw<1||sh<1)return;ctx.save();ctx.globalAlpha=op;ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality=\'high\';ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.clip();var N=100,ssw=sw/N;for(var i=0;i<N;i++){var rl=-Math.PI/2+Math.PI*(i+.5)/N;var al=az+rl;var fr=((al/(2*Math.PI))%1+1)%1;var sx2=fr*sw;while(sx2<0)sx2+=sw;while(sx2>=sw)sx2-=sw;var cl=Math.cos(rl);var dw=Math.max(.3,(2*R/N)*cl);var dx=cx+R*Math.sin(rl)-dw/2;if(sx2+ssw<=sw){ctx.drawImage(src,sx+sx2,sy,Math.max(1,ssw),sh,dx,cy-R,dw,2*R)}else{var w1=sw-sx2,w2=ssw-w1;if(w1>0)ctx.drawImage(src,sx+sx2,sy,w1,sh,dx,cy-R,dw*(w1/ssw),2*R);if(w2>0)ctx.drawImage(src,sx,sy,w2,sh,dx+dw*(w1/ssw),cy-R,dw*(w2/ssw),2*R)}}ctx.restore()}function camChanged(){var az=Math.atan2(cam.position.x,cam.position.z);var dist=cam.position.length();var el=Math.asin(THREE.MathUtils.clamp(cam.position.y/Math.max(.001,dist),-1,1));if(dirty){lastAz=az;lastDist=dist;lastEl=el;dirty=false;return true}if(lastAz===null){lastAz=az;lastDist=dist;lastEl=el;return true}var da=az-lastAz;if(da>Math.PI)da-=2*Math.PI;if(da<-Math.PI)da+=2*Math.PI;var changed=Math.abs(da)>0.003||Math.abs(dist-lastDist)>0.02||Math.abs(el-lastEl)>0.003;if(changed){lastAz=az;lastDist=dist;lastEl=el}return changed}function renderHM(){if(!camChanged())return;var w=vp.clientWidth,h=vp.clientHeight;hx.clearRect(0,0,w,h);var pr=sProj();if(pr.R<4)return;var op=parseFloat($(\'iO\').value),sp=parseFloat($(\'iS\').value),comp=$(\'iD\').checked;var vis=[];for(var i=0;i<29;i++){var l=LV[i];if(l&&l.vis){var sw2=l.img.naturalWidth||900,sh2=l.img.naturalHeight||675,cr=gCR(sw2,sh2);vis.push({src:l.img,sx:cr.sx,sy:cr.sy,sw:cr.sw,sh:cr.sh,i:i})}}if(!vis.length)return;if(comp){var lo=op*parseFloat($(\'iB\').value)/vis.length;vis.forEach(function(l){projLayer(hx,l.src,l.sx,l.sy,l.sw,l.sh,pr.cx,pr.cy,pr.R,pr.az,lo)})}else{var gp=sp*pr.R*8;vis.forEach(function(l,i){var lr=pr.R+gp*(i+1);projLayer(hx,l.src,l.sx,l.sy,l.sw,l.sh,pr.cx,pr.cy,lr,pr.az,op*.6)})}}function renderFlat(){var w=vp.clientWidth,h=vp.clientHeight;hx.clearRect(0,0,w,h);hx.fillStyle=\'#050508\';hx.fillRect(0,0,w,h);var vis=[];for(var i=0;i<29;i++){var l=LV[i];if(l&&l.vis){var sw2=l.img.naturalWidth||900,sh2=l.img.naturalHeight||675;vis.push({img:l.img,cr:gCR(sw2,sh2)})}}if(!vis.length){hx.fillStyle=\'rgba(255,255,255,.2)\';hx.font=\'13px Manrope\';hx.textAlign=\'center\';hx.fillText(\'No visible layers\',w/2,h/2);return}var cr0=vis[0].cr,asp=cr0.sw/cr0.sh;var mW=w*.92,mH=mW/asp;if(mH>h*.88){mH=h*.88;mW=mH*asp}var ox=(w-mW)/2,oy=(h-mH)/2;hx.globalCompositeOperation=\'lighter\';var bf=parseFloat($(\'iB\').value);vis.forEach(function(l){hx.globalAlpha=bf/vis.length;hx.drawImage(l.img,l.cr.sx,l.cr.sy,l.cr.sw,l.cr.sh,ox,oy,mW,mH)});hx.globalCompositeOperation=\'source-over\';hx.globalAlpha=1;hx.strokeStyle=\'rgba(255,255,255,.1)\';hx.lineWidth=1;hx.strokeRect(ox,oy,mW,mH);hx.strokeStyle=\'rgba(255,255,255,.12)\';hx.lineWidth=.5;for(var lat=-60;lat<=60;lat+=30){var y=oy+mH*(1-(lat+90)/180);hx.beginPath();hx.moveTo(ox,y);hx.lineTo(ox+mW,y);hx.stroke()}for(var lon=-180;lon<180;lon+=30){var x=ox+mW*(lon+180)/360;hx.beginPath();hx.moveTo(x,oy);hx.lineTo(x,oy+mH);hx.stroke()}hx.fillStyle=\'rgba(255,255,255,.35)\';hx.font=\'600 8px Manrope\';hx.textAlign=\'center\';for(var lon=-150;lon<=150;lon+=30){var x=ox+mW*(lon+180)/360;hx.fillText(lon+\'\\u00B0\',x,oy+mH+12)}hx.textAlign=\'right\';for(var lat=-60;lat<=60;lat+=30){var y=oy+mH*(1-(lat+90)/180);hx.fillText(lat+\'\\u00B0\',ox-5,y+3)}hx.fillStyle=\'rgba(163,204,86,.7)\';hx.font=\'700 10px Manrope\';hx.textAlign=\'left\';hx.fillText(\'ANOMALY HEATMAP \\u2014 \'+vis.length+\' layers\',ox,oy-8);hx.strokeStyle=\'rgba(163,204,86,.2)\';hx.lineWidth=1;var eqY=oy+mH*0.5;hx.beginPath();hx.moveTo(ox,eqY);hx.lineTo(ox+mW,eqY);hx.stroke()}async function process(){var urls=parseU(up.value),sel2=[];for(var i=0;i<29;i++)if(sel[i])sel2.push(i);if(!urls.length||!sel2.length)return;pb.textContent=\'LOADING...\';pb.style.pointerEvents=\'none\';pb.classList.remove(\'ready\');$(\'mSt\').textContent=\'Loading...\';LV=new Array(29).fill(null);dirty=true;lastAz=null;lastDist=null;lastEl=null;var ok=0,fail=0;for(var idx=0;idx<sel2.length;idx++){var lv=sel2[idx];if(lv>=urls.length){fail++;continue}$(\'mSt\').textContent=\'L\'+(lv+1)+\' (\'+(idx+1)+\'/\'+sel2.length+\')\';try{var img=await loadImg(urls[lv]);LV[lv]={id:lv+1,alt:gA(lv+1),img:img,vis:true};ok++;var si=$(\'si\'+lv);if(si){si.src=img.src;si.style.display=\'block\'}}catch(e){fail++;var si=$(\'si\'+lv);if(si)si.style.display=\'none\'}}buildGrid();$(\'ov\').classList.add(\'hide\');$(\'bb\').style.display=\'\';$(\'mSt\').textContent=ok+\' layers\'+(fail>0?\' (\'+fail+\' fail)\':\'\');ui.innerHTML=\'<b style="color:var(--acc)">\'+ok+\'</b> loaded\'+(fail>0?\', <span class="er">\'+fail+\' fail</span>\':\'\');pb.textContent=\'PROCESS\';pb.style.pointerEvents=\'\';updPb();dirty=true}function buildGrid(){var g=$(\'lg\');g.innerHTML=\'\';for(var i=0;i<29;i++){var l=LV[i],d=document.createElement(\'div\');d.className=l?\'ly on\':\'ly off\';d.id=\'ly\'+i;var ih=\'<img src="" style="display:none">\';if(l&&l.img)ih=\'<img src="\'+l.img.src+\'" style="display:block">\';d.innerHTML=\'<div style="position:absolute;top:1px;right:1px;width:5px;height:5px;border-radius:50%;background:\'+(l?\'var(--acc)\':\'#333\')+\'"></div>\'+ih+\'<div class="lt">L\'+(i+1)+\' \'+gA(i+1)+\'km</div>\';if(l)(function(lv){d.onclick=function(){togL(lv)}})(i);g.appendChild(d)}}function togL(lv){var el=$(\'ly\'+lv),l=LV[lv];if(!l)return;l.vis=!l.vis;el.className=l.vis?\'ly on\':\'ly off\';dirty=true}function bS(id,did){$(id).addEventListener(\'input\',function(){$(did).textContent=this.value;dirty=true})}bS(\'iS\',\'vS\');bS(\'iO\',\'vO\');bS(\'iB\',\'vB2\');bS(\'cT\',\'vT\');bS(\'cB\',\'vB\');bS(\'cL\',\'vL\');bS(\'cR\',\'vR\');$(\'iAR\').addEventListener(\'change\',function(e){ctrl.autoRotate=e.target.checked});$(\'iG\').addEventListener(\'change\',function(e){gridM.visible=e.target.checked});$(\'iD\').addEventListener(\'change\',function(){dirty=true});$(\'iC\').addEventListener(\'change\',function(){dirty=true});$(\'iH\').addEventListener(\'change\',function(){dirty=true});pb.addEventListener(\'click\',process);vp.addEventListener(\'mousemove\',function(e){if($(\'iH\').checked)return;var pr=sProj(),rect=vp.getBoundingClientRect(),dx=e.clientX-rect.left-pr.cx,dy=e.clientY-rect.top-pr.cy;if(Math.sqrt(dx*dx+dy*dy)<=pr.R){var ny=-dy/pr.R,nx=dx/pr.R,nz=Math.sqrt(Math.max(0,1-nx*nx-ny*ny));var lat=Math.asin(THREE.MathUtils.clamp(ny,-1,1))*180/Math.PI;var lon=Math.atan2(nx,nz)*180/Math.PI+pr.az*180/Math.PI;$(\'mCo\').textContent=lat.toFixed(1)+\', \'+(((lon+180)%360+360)%360-180).toFixed(1);$(\'mLv\').textContent=\'Map\';$(\'mAl\').textContent=\'-\'}else{$(\'mLv\').textContent=\'-\';$(\'mAl\').textContent=\'-\';$(\'mCo\').textContent=\'-\'}});(function a(){requestAnimationFrame(a);ctrl.update();if($(\'iH\').checked){renderFlat()}else{renderHM()}ren.render(scene,cam)})();window.addEventListener(\'resize\',function(){cam.aspect=vp.clientWidth/vp.clientHeight;cam.updateProjectionMatrix();ren.setSize(vp.clientWidth,vp.clientHeight);resHM()});buildSel();<\/script><\/body><\/html>';
+document.getElementById('f4').src=URL.createObjectURL(new Blob([_globeSrc],{type:'text/html'}));
+
+var S=[
+{g:"METOP · EUMETSAT GRAS",s:[
+{n:"METOP-B",c:"GRAS-RO",id:38771,st:"on"},
+{n:"METOP-C",c:"GRAS-RO",id:43689,st:"on"},
+{n:"METOP-D",c:"GRAS-NG",id:null,st:"uk",note:"METOP-SG A1"}
+]},
+{g:"TerraSAR-X / TanDEM-X · DLR",s:[
+{n:"TerraSAR-X",c:"IGOR",id:31698,st:"dg"},
+{n:"TanDEM-X",c:"IGOR",id:41565,st:"dg"}
+]},
+{g:"PAZ · INTA/Hisdesat",s:[
+{n:"PAZ",c:"ROHP-PAZ",id:43209,st:"on"}
+]},
+{g:"Sentinel-6 · ESA/NASA/NOAA",s:[
+{n:"Sentinel-6A",c:"POSEIDON-4/RO",id:47504,st:"on"}
+]},
+{g:"PlanetiQ · GNOMES Constellation",s:[
+{n:"GNOMES-1",c:"Tri-GNSS RO",id:46266,st:"on"},
+{n:"GNOMES-2",c:"Tri-GNSS RO",id:47683,st:"on"},
+{n:"GNOMES-3",c:"Tri-GNSS RO",id:52158,st:"on"},
+{n:"GNOMES-4",c:"Tri-GNSS RO",id:58462,st:"on"},
+{n:"GNOMES-5",c:"Tri-GNSS RO",id:60574,st:"on"}
+]},
+{g:"Spire · Lemur 3U CubeSats",s:[
+{n:"Lemur-2 Bricklayer",c:"SGNSS-RO",id:41474,st:"on"},
+{n:"Lemur-2 Truthteller",c:"SGNSS-RO",id:41476,st:"on"},
+{n:"Lemur-2 FactChecker",c:"SGNSS-RO",id:41477,st:"on"},
+{n:"Lemur-2 SpaceBillie",c:"SGNSS-RO",id:42795,st:"on"},
+{n:"Lemur-2 Wingman",c:"SGNSS-RO",id:42796,st:"on"},
+{n:"Lemur-2 SpaceyMcFace",c:"SGNSS-RO",id:43011,st:"on"},
+{n:"Lemur-2 Chirpit",c:"SGNSS-RO",id:51066,st:"on"},
+{n:"Lemur-2 Dali",c:"SGNSS-RO",id:51067,st:"on"},
+{n:"+90 more active",c:"SGNSS-RO",id:null,st:"on",note:"Full Spire fleet"}
+]},
+{g:"FY-3 · CMA GNOS",s:[
+{n:"FY-3D",c:"GNOS-1",id:43010,st:"on"},
+{n:"FY-3E",c:"GNOS-2",id:48808,st:"on"}
+]},
+{g:"COSMIC-2 · FORMOSAT-7 / NSPO-NOAA",s:[
+{n:"COSMIC-2 E1",c:"TGRS",id:44561,st:"on"},
+{n:"COSMIC-2 E2",c:"TGRS",id:44562,st:"on"},
+{n:"COSMIC-2 E3",c:"TGRS",id:44563,st:"on"},
+{n:"COSMIC-2 E4",c:"TGRS",id:44564,st:"on"},
+{n:"COSMIC-2 E5",c:"TGRS",id:44565,st:"on"},
+{n:"COSMIC-2 E6",c:"TGRS",id:44566,st:"on"}
+]},
+{g:"GRACE-FO · NASA/DLR",s:[
+{n:"GRACE-C (FO-1)",c:"GNSS-POD/RO",id:43476,st:"on"},
+{n:"GRACE-D (FO-2)",c:"GNSS-POD/RO",id:43477,st:"on"}
+]},
+{g:"KOMPSAT-5 · KARI",s:[
+{n:"KOMPSAT-5",c:"AOPOD-RO",id:39224,st:"dg"}
+]}
+];
+var total=0,h='<div class="sth"><span>Satellite</span><span>Payload</span><span>NORAD ID</span><span>Act</span></div>';
+S.forEach(function(g){
+h+='<div class="cg"><div class="cg-h">'+g.g+' <span class="nn">'+g.s.length+'</span></div>';
+g.s.forEach(function(s){
+total++;
+var ni,ac;
+if(s.id){
+ni='<span class="ni">'+s.id+'</span>';
+ac='<div class="sa"><div class="sd '+s.st+'"></div><button onclick="lk(\''+s.id+'\')" title="Track on N2YO"><i data-lucide="external-link" style="width:11px;height:11px"></i></button><button onclick="cp(\''+s.id+'\',this)" title="Copy NORAD ID"><i data-lucide="copy" style="width:11px;height:11px"></i></button></div>';
+}else{
+ni='<span class="nu" title="'+(s.note||'')+'">TBD</span>';
+ac='<div class="sa"><div class="sd '+s.st+'"></div></div>';
+}
+h+='<div class="sr"><span class="sn">'+s.n+'</span><span class="sc">'+s.c+'</span>'+ni+ac+'</div>';
+});
+h+='</div>';
+});
+h+='<div class="ft">NORAD IDs: plain text with <span style="color:#a3cc56">⎘ copy</span> and <span style="color:#a3cc56">↗ track</span> icons · <span style="color:#a3cc56">● Active</span> · <span style="color:#eab308">● Degraded</span> · <span style="color:#6b7280">● Unconfirmed</span></div>';
+document.getElementById('catalog').innerHTML=h;
+document.getElementById('sc').textContent=total+' SATS';
+
+function swSrc(tid,name,tag,src,zm){
+  document.getElementById('f0').src=src;
+  document.querySelectorAll('#p0 .sw button').forEach(function(b){b.classList.remove('on')});
+  document.getElementById(tid).classList.add('on');
+  document.getElementById('p0n').textContent=name;
+  document.getElementById('p0t').textContent=tag;
+  var pw=document.getElementById('p0w');
+  if(zm){pw.classList.add('zm')}else{pw.classList.remove('zm')}
+}
+
+function rf(b,f){b.classList.add('spinning');var fr=document.getElementById(f);if(fr.tagName==='IFRAME')fr.src=fr.src;setTimeout(function(){b.classList.remove('spinning')},700)}
+function fs(id){if(document.fullscreenElement){document.exitFullscreen();return}var el=document.getElementById(id);(el.requestFullscreen||el.webkitRequestFullscreen||el.msRequestFullscreen).call(el)}
+document.addEventListener('fullscreenchange',function(){var isFs=!!document.fullscreenElement;document.querySelectorAll('.fb i').forEach(function(ic){ic.setAttribute('data-lucide',isFs?'minimize-2':'maximize-2')});lucide.createIcons()});
+function lk(v){window.open('https://www.n2yo.com/satellite/?s='+v,'_blank')}
+function cp(v,b){var ok=function(){b.innerHTML='<i data-lucide="check" style="width:11px;height:11px;color:#a3cc56"></i>';lucide.createIcons();setTimeout(function(){b.innerHTML='<i data-lucide="copy" style="width:11px;height:11px"></i>';lucide.createIcons()},1200)};if(navigator.clipboard){navigator.clipboard.writeText(v).then(ok)}else{var t=document.createElement('textarea');t.value=v;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);ok()}}
+lucide.createIcons();
+</script>
+</body>
+</html>
