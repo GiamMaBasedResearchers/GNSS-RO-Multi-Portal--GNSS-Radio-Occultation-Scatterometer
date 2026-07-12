@@ -119,6 +119,8 @@ A categorized catalog of every known GNSS-RO payload in orbit, with:
      Constellation groupings: METOP/GRAS, COSMIC-2/TGRS, Spire/SGNSS-RO, GNOMES, FY-3/GNOS, PAZ/ROHP-PAZ, Sentinel-6, GRACE-FO, KOMPSAT-5
 
 RFI use case: When ECMWF or ROM-SAF shows anomalies, use this catalog to immediately identify which specific satellite(s) and payload(s) are affected, then track them in real-time via N2YO to correlate with ground tracks over suspected RFI regions.
+
+
 5. GNSS-RO Anomaly Globe (Bottom-Right Panel)
 
 Interactive 3D Sphere Projection of Anomaly Layers
@@ -130,7 +132,69 @@ Upload ECMWF anomaly map PNGs (extracted via jsonlink.io from ECMWF level pages)
      Crop controls — Remove ECMWF chart chrome (legends, colorbars) for clean projection
      Mouse coordinate readout — Hover to get exact lat/lon of anomaly features for RFI source triangulation
 
+Link Download PNGs example:
+
+https://charts.ecmwf.int/streaming/20260711-0910/23/plot_netcdf-worker-plot-7f6b6dc7b-6gkjb-6fe5cac1a363ec1525f54343b6cc9fd8-nsag73j8.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/7a/plot_netcdf-worker-plot-7f6b6dc7b-pnxwx-6fe5cac1a363ec1525f54343b6cc9fd8-xkbg5qs6.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/d9/plot_netcdf-worker-plot-7f6b6dc7b-2qmf2-6fe5cac1a363ec1525f54343b6cc9fd8-hz7p6k82.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/bf/plot_netcdf-worker-plot-7f6b6dc7b-qbcq9-6fe5cac1a363ec1525f54343b6cc9fd8-nqbg9fqs.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/69/plot_netcdf-worker-plot-7f6b6dc7b-qbcq9-6fe5cac1a363ec1525f54343b6cc9fd8-trv_lkom.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/0e/plot_netcdf-worker-plot-7f6b6dc7b-9hkx4-6fe5cac1a363ec1525f54343b6cc9fd8-p5o5walg.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/d3/plot_netcdf-worker-plot-7f6b6dc7b-4t4hj-6fe5cac1a363ec1525f54343b6cc9fd8-dqn6lcgh.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/0c/plot_netcdf-worker-plot-7f6b6dc7b-pnxwx-6fe5cac1a363ec1525f54343b6cc9fd8-r3_5x8r6.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/47/plot_netcdf-worker-plot-7f6b6dc7b-6gkjb-6fe5cac1a363ec1525f54343b6cc9fd8-tzlw8qab.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/2a/plot_netcdf-worker-plot-7f6b6dc7b-cfm7n-6fe5cac1a363ec1525f54343b6cc9fd8-lszykcgt.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/78/plot_netcdf-worker-plot-7f6b6dc7b-qbcq9-6fe5cac1a363ec1525f54343b6cc9fd8-iglrb08h.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/02/plot_netcdf-worker-plot-7f6b6dc7b-4t4hj-6fe5cac1a363ec1525f54343b6cc9fd8-n75nh7u6.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/3c/plot_netcdf-worker-plot-7f6b6dc7b-4t4hj-6fe5cac1a363ec1525f54343b6cc9fd8-rxmyrhvf.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/68/plot_netcdf-worker-plot-7f6b6dc7b-k5xpp-6fe5cac1a363ec1525f54343b6cc9fd8-5j_f65wb.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/ab/plot_netcdf-worker-plot-7f6b6dc7b-9hkx4-6fe5cac1a363ec1525f54343b6cc9fd8-ek68lrmn.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/1f/plot_netcdf-worker-plot-7f6b6dc7b-6gkjb-6fe5cac1a363ec1525f54343b6cc9fd8-710si8l9.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/4b/plot_netcdf-worker-plot-7f6b6dc7b-k5xpp-6fe5cac1a363ec1525f54343b6cc9fd8-y7qxaxu8.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/e0/plot_netcdf-worker-plot-7f6b6dc7b-9hkx4-6fe5cac1a363ec1525f54343b6cc9fd8-95e88tuy.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/ac/plot_netcdf-worker-plot-7f6b6dc7b-9hkx4-6fe5cac1a363ec1525f54343b6cc9fd8-4xfxol4j.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/dd/plot_netcdf-worker-plot-7f6b6dc7b-gz9mg-6fe5cac1a363ec1525f54343b6cc9fd8-fyuq1tns.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/e0/plot_netcdf-worker-plot-7f6b6dc7b-6gkjb-6fe5cac1a363ec1525f54343b6cc9fd8-l23ddoro.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/3a/plot_netcdf-worker-plot-7f6b6dc7b-9hkx4-6fe5cac1a363ec1525f54343b6cc9fd8-md10hwh3.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/95/plot_netcdf-worker-plot-7f6b6dc7b-cfm7n-6fe5cac1a363ec1525f54343b6cc9fd8-7r2hkhqd.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/3d/plot_netcdf-worker-plot-7f6b6dc7b-6gkjb-6fe5cac1a363ec1525f54343b6cc9fd8-70rnug_f.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/3c/plot_netcdf-worker-plot-7f6b6dc7b-6gkjb-6fe5cac1a363ec1525f54343b6cc9fd8-cldl8n8t.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/fd/plot_netcdf-worker-plot-7f6b6dc7b-cfm7n-6fe5cac1a363ec1525f54343b6cc9fd8-_a313u5z.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/18/plot_netcdf-worker-plot-7f6b6dc7b-4t4hj-6fe5cac1a363ec1525f54343b6cc9fd8-ljanc_qu.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/a4/plot_netcdf-worker-plot-7f6b6dc7b-2qmf2-6fe5cac1a363ec1525f54343b6cc9fd8-61ciezq0.png
+
+https://charts.ecmwf.int/streaming/20260711-0910/36/plot_netcdf-worker-plot-7f6b6dc7b-k5xpp-6fe5cac1a363ec1525f54343b6cc9fd8-31a2g_rk.png
+
+
 RFI Detection Workflow
+
 text
  
 1. SPOT  →  ECMWF System Comparison shows increased std dev for GPS stream
@@ -151,6 +215,7 @@ Technical Notes
      Fullscreen mode available on every panel for detailed inspection
 
 Constellations Monitored
+
 Constellation
 	
 Payload
