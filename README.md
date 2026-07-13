@@ -101,11 +101,8 @@ Multi-Constellation Bias & Spread Analysis
 This chart compares normalized departure statistics across all GNSS-RO data streams assimilated at ECMWF. Critical for RFI attribution:
 ECMWF Indicator
 	
-RFI Interpretation
-Increased standard deviation for a specific constellation	That constellation's L-band receiver may be experiencing RFI, or its transmitter signals are being jammed en route
-Bias shift between GPS, Galileo, or other GNSS	Differential RFI affecting one frequency band (L1 vs L2 vs L5) causes C/A-free bending angle bias — a classic RFI signature
-Outlier clusters in geographical mean	Spatially coherent outliers strongly suggest regional RFI rather than random measurement noise
-Data anomaly flags	ECMWF's own QC flagging RFI-contaminated profiles before assimilation — direct evidence of RFI impact on NWP
+<img width="512" height="506" alt="image" src="https://github.com/user-attachments/assets/02817254-dd97-4749-86c1-ebcf16fac8a3" />
+
  
  
 4. GNSS-RO Satellite Catalog (Bottom-Left Panel)
@@ -216,24 +213,10 @@ Technical Notes
 
 Constellations Monitored
 
-Constellation
-	
-Payload
-	
-Satellites
-	
-Agency
-METOP-SG	GRAS / GRAS-NG	METOP-B, C, D	EUMETSAT
-COSMIC-2 / FORMOSAT-7	TGRS	6 satellites (E1-E6)	NSPO / NOAA
-Spire Lemur-2	SGNSS-RO	100+ CubeSats	Spire Global
-GNOMES	Tri-GNSS RO	GNOMES 1-5	PlanetiQ
-FY-3	GNOS-1/2	FY-3D, FY-3E	CMA
-PAZ	ROHP-PAZ	PAZ	INTA / Hisdesat
-Sentinel-6	POSEIDON-4/RO	Sentinel-6A	ESA / NASA / NOAA
-TerraSAR-X / TanDEM-X	IGOR	2 satellites	DLR
-GRACE-FO	GNSS-POD/RO	GRACE-C, GRACE-D	NASA / DLR
-KOMPSAT-5	AOPOD-RO	1 satellite	KARI
- 
+
+<img width="545" height="442" alt="image" src="https://github.com/user-attachments/assets/4e1b618d-73d6-452c-b073-278a87e3265c" />
+
+
  
 Links
 
